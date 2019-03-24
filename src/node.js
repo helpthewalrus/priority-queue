@@ -34,35 +34,46 @@ class Node {
 			this.parent.removeChild(this);
 		}
 	}
-
+	
 	swapWithParent() {
 		if (this.parent) {
 			if (this.parent.left === this) {
-				this.parent.left = null; // 
-				
-				
-				if (this.parent.right) {
-					this.right = this.parent.right;
-					this.right.parent = this;
-				}
-				
-				this.parent.right = null; //
+				let nodeParent = this.parent;
+				let nodeLeft = this.left;
+				let nodeRight = this.right;
+				let nodeParentRight = this.parent.right;
+				let nodeParentLeft = this.parent.left;
 
-				if (this.left) {
-					this.parent.left = this.left;
-					this.left.parent = this.parent;
-				}
+				this.parent.left = null; 
+				this.parent.right = null;
 
 				if (this.right) {
 					this.parent.right = this.right;
 					this.right.parent = this.parent;
 				}
 				
+				if (this.left) {
+					this.parent.left = this.left;
+					this.left.parent = this.parent;
+				}
+
+				if (nodeParentRight) {
+					this.right = nodeParentRight;
+					this.right.parent = this;
+				}
+					
 				this.left = this.parent;
 			}
 
 			if (this.parent.right === this) {
-				this.parent.right = null; // 
+				let nodeParent = this.parent;
+				let nodeLeft = this.left;
+				let nodeRight = this.right;
+				let nodeParentRight = this.parent.right;
+				let nodeParentLeft = this.parent.left;
+
+				this.parent.left = null; 
+				this.parent.right = null;
 
 				if (this.left) {
 					this.parent.left = this.left;
@@ -73,18 +84,16 @@ class Node {
 					this.parent.right = this.right;
 					this.right.parent = this.parent;
 				}
-				
-				this.left = this.parent.left;
-				this.left.parent = this;
-				this.right = this.parent;
 
-				if (this.parent.parent) {
-					this.parent.parent.right = this;
-				}
+			
+				this.left = nodeParentLeft;
+				this.left.parent = this;
+		
+					
+				this.right = this.parent;
 			}
 			
 			[this.parent.parent, this.parent] = [this, this.parent.parent];
-			
 			
 			if (this.parent) {
 				if (this.parent.left) {
