@@ -14,11 +14,12 @@ class PriorityQueue {
 	}
 
 	size() {
+		return this.length;
 
 	}
 
 	isEmpty() {
-		
+		return this.length === 0;		
 	}
 }
 
